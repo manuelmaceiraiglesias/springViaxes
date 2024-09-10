@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo viaje</title>
+    <style>
+        body {
+            background-color: cornflowerblue;
+        }
+
+        .formulario {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 1vh;
+            margin-bottom: 1vh;
+            margin-right: 1vw;
+            margin-left: 1vw;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        .enviar {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        form {
+            border-width: 2px;
+            border-style: solid;
+            border-color: black;
+            margin-left: 30vw;
+            margin-right: 30vw;
+        }
+        input{width: 20vw;}
+        .boton{width: fit-content;
+            background-color: crimson;
+            border-width: 2px;
+            border-color: black;
+            border-style: solid;
+            border-radius: 5px;
+            text-decoration: none;
+            padding-left: 5px;
+            padding-right: 5px;
+            color:black;
+        }
+        p{
+            color:red;
+            text-align:right;
+            margin-top: 1vh;
+            margin-bottom: 1vh;
+            margin-right: 1vw;
+            margin-left: 1vw;
+        }
+    </style>
+</head>
+
+<body>
+<h3>Nuevo viaje</h3>
+<!--The action tag can be placed onto a form to specify the url to pass the form to-->
+<form th:action="@{/viajes}" th:object="${viaje}" method="POST">
+    <div class="formulario">
+        <label> Fecha : </label>
+        <!-- *{fecha} e o mesmo que ${viaje.fecha} -->
+        <input type="date" name="fecha" th:field="*{fecha}"/>
+    </div>
+    <p th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></p>
+    <div class="formulario">
+        <label>Distancia :</label>
+        <input type="text" name="distancia" th:field="*{distancia}" size="50"/>
+    </div>
+    <!-- Non uso errors como na fecha porque o parsear o texto da o erro da clase e non un personalizado -->
+    <p th:if="${#fields.hasErrors('distancia')}">El campo debe contener solo un numero positivo entero</p>
+    <div class="formulario">
+        <label>Desnivel :</label>
+        <input type="text" name="desnivel" th:field="*{desnivel}" size="50"/>
+    </div>
+    <p th:if="${#fields.hasErrors('desnivel')}">El campo debe contener solo un numero positivo entero o decimal</p>
+    <div class="formulario">
+        <label>Comentario :</label>
+        <input type="text" name="comentario" th:field="*{comentario}" size="50"/>
+    </div>
+    <p th:if="${#fields.hasErrors('comentario')}" th:errors="*{comentario}"></p>
+    <div class="formulario"><input class="boton" type="submit" value="Enviar"/>
+        <a class="boton" th:href="@{/viajes}">Cancelar</a>
+    </div>
+
+</form>
+
+</body>
+
+</html>

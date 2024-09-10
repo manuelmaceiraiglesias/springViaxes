@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Viajes en bici</title>
+    <style>
+        table {
+            margin-top: 1vh;
+            margin-bottom: 1vh;
+            margin-left: auto;
+            margin-right: auto;
+            border-width: 3px;
+            border-color: black;
+            border-style: solid;
+        }
+
+        th {
+            border-width: 3px;
+            border-color: black;
+            border-style: solid;
+        }
+
+        th,
+        td {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        body {
+            background-color: cornflowerblue;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        .boton {
+            background-color: crimson;
+            border-width: 2px;
+            border-color: black;
+            border-style: solid;
+            border-radius: 5px;
+            text-decoration: none;
+            padding-left: 5px;
+            padding-right: 5px;
+            color:black;
+        }
+        #nuevo{display: block;text-align: center;margin-left: 40vw;margin-right: 40vw;}
+    </style>
+</head>
+
+<body>
+    <h3>Lista de viajes</h3>
+    <a class="boton" id="nuevo" th:href="@{/viajes/new}">&nbsp Nuevo &nbsp</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Viaje fecha</th>
+                <th> Viaje distancia</th>
+                <th> Viaje desnivel</th>
+                <th> Viaje lugar</th>
+                <th> Acciones </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="viaje: ${viajes}">
+                <td th:text="${viaje.fecha}"></td>
+                <td th:text="${viaje.distancia}"></td>
+                <td th:text="${viaje.desnivel}"></td>
+                <td th:text="${viaje.comentario}"></td>
+                <td>
+                    <div th:unless="${#lists.isEmpty(viajes)}">
+                        <a th:href="@{/viajes/edit/{fecha}(fecha=${viaje.fecha})}" class="boton">Modificar</a>
+                        <a th:href="@{/viajes/{fecha}(fecha=${viaje.fecha})}" class="boton">Borrar</a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+</body>
