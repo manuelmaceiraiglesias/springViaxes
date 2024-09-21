@@ -43,6 +43,7 @@
             text-decoration: none;
             padding-left: 5px;
             padding-right: 5px;
+            color:black;
         }
                 p{
             color:red;
@@ -73,7 +74,7 @@
     </div>
     <p th:if="${#fields.hasErrors('comentario')}" th:errors="*{comentario}"></p>
     <div class="formulario"><input class="boton" type="submit" value="Enviar"/>
-        <button class="boton" th:action="@{/viajes}">Cancelar</button>
+        <a class="boton" th:href="@{/viajes}">Cancelar</a>
     </div>
 
 </form>
